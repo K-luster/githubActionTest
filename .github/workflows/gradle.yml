@@ -42,6 +42,6 @@ jobs:
       run: |
           pwd
           docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
-          docker build -f ./Dockerfile -t jakeheon/githubaction .
+          docker build -t jakeheon/githubaction .
           docker push jakeheon/githubaction
         
