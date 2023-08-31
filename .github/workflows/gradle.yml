@@ -48,8 +48,10 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     
+    ## gradle build
     - name: Build with Gradle
-      run: ./gradlew clean build
+      run: ./gradlew bootJar
+
     # dockerfile을 통해 이미지를 빌드하고, 이를 docker repo로 push 합니다.
    # 이 때 사용되는 ${{ secrets.DOCKER_REPO }}/directors-dev 가 위에서 만든 도커 repository 입니다.
     - name: Docker build & push to docker repo
