@@ -30,6 +30,10 @@ jobs:
         distribution: 'temurin'
     - name: init with Gradle
       uses: gradle/gradle-build-action@v2
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+      with:
+        version: v0.7.0
     - run: gradle init
     - name: Build with Gradle
       uses: gradle/gradle-build-action@v2
@@ -40,9 +44,8 @@ jobs:
    # 이 때 사용되는 ${{ secrets.DOCKER_REPO }}/directors-dev 가 위에서 만든 도커 repository 입니다.
     - name: Docker build & push to docker repo
       run: |
-          pwd
-          ls ${{ github.workspace }}/githubActionTest
+          cd ${{ github.workspace }}/githubActionTest
           docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
-          docker build -t jakeheon/githubaction -f ./githubActionTest/Dockerfile .
+          docker build -t jakeheon/githubaction -f Dockerfile .
           docker push jakeheon/githubaction
         
