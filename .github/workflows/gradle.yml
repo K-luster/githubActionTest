@@ -41,8 +41,8 @@ jobs:
     - name: Docker build & push to docker repo
       run: |
           pwd
-          ls ${{ github.workspace }}
+          ls ${{ github.workspace }}/githubaction
           docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
-          docker build -t jakeheon/githubaction .
+          docker build -t jakeheon/githubaction ./githubaction
           docker push jakeheon/githubaction
         
