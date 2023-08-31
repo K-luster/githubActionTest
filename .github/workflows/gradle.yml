@@ -43,6 +43,6 @@ jobs:
           pwd
           ls ${{ github.workspace }}/githubActionTest
           docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
-          docker build -t jakeheon/githubaction ./githubActionTest
+          docker build -t jakeheon/githubaction ./githubActionTest/Dockerfile
           docker push jakeheon/githubaction
         
