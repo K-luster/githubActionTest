@@ -41,6 +41,6 @@ jobs:
     - name: Docker build & push to docker repo
       run: |
           docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
-          docker build --build-arg DEPENDENCY=build/dependency -t jakeheon/githubaction --platform linux/amd64 githubActionTest/Dockerfile
-          docker push jakeheon/directors-dev
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/githubaction --no-cache --build-arg JAR_FILE=build/libs/githubActionTest-0.0.1-SNAPSHOT.jar .
+          docker push jakeheon/githubaction
         
