@@ -23,6 +23,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
+    - name: move to project directory
+      run: cd ${{ github.workspace }}/githubActionTest
+      
     - name: Set up JDK 11
       uses: actions/setup-java@v3
       with:
@@ -50,7 +54,6 @@ jobs:
    # 이 때 사용되는 ${{ secrets.DOCKER_REPO }}/directors-dev 가 위에서 만든 도커 repository 입니다.
     - name: Docker build & push to docker repo
       run: |
-          cd ${{ github.workspace }}/githubActionTest
           docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
           docker build -t jakeheon/githubaction -f Dockerfile .
           docker push jakeheon/githubaction
