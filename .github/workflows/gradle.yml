@@ -41,6 +41,6 @@ jobs:
     - name: Docker build & push to docker repo
       run: |
           docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
-          docker build --build-arg DEPENDENCY=build/dependency -t jakeheon/githubaction --platform linux/amd64 .  
+          docker build --build-arg DEPENDENCY=build/dependency -t jakeheon/githubaction --platform linux/amd64 ./Dockerfile  
           docker push jakeheon/directors-dev
         
