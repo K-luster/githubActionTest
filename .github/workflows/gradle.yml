@@ -46,6 +46,7 @@ jobs:
     
     - name: Build with Gradle
       run: |
+        cd ${{ github.workspace }}/githubActionTest
         chmod +x ./gradlew
         ./gradlew clean build -x test
 
