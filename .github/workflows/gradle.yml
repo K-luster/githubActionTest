@@ -60,7 +60,7 @@ jobs:
 
     - name: Build and deploy
       run: |
-        echo: "$SSH_PEM_KEY" >> $HOME/key.pem
+        echo: $SSH_PEM_KEY >> $HOME/key.pem
         chmod 400 $HOME/key.pem
         ssh -i $HOME/key.pem -o StrictHostKeyCheckin=no ubuntu@$SSH_KNOWN_HOSTS
 #        sudo docker rm -f $(docker ps -qa)
