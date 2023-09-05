@@ -57,19 +57,17 @@ jobs:
           docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
           docker build -t jakeheon/githubaction -f Dockerfile .
           docker push jakeheon/githubaction
-        - name: Deploy to EC2 server
 
     - name: Deploy to server
       uses: appleboy/ssh-action@master
-      id: deploy
       with:
         host: ${{ secrets.HOST }}
         username: ubuntu
         key: ${{ secrets.KEY }}
         envs: GITHUB_SHA
-      script: |
-        sudo docker rm -f $(docker ps -qa)
-        sudo docker pull jakeheon/githubaction
-        docker-compose up -d
-        docker image prune -fd
+        script: |
+          sudo docker rm -f $(docker ps -qa)
+          sudo docker pull jakeheon/githubaction
+          docker-compose up -d
+          docker image prune -fd
         
