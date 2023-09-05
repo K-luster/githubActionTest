@@ -50,8 +50,7 @@ jobs:
 #        gradle-version: 7.5.1
 #        arguments: build
 
-  # dockerfile을 통해 이미지를 빌드하고, 이를 docker repo로 push 합니다.
-   # 이 때 사용되는 ${{ secrets.DOCKER_REPO }}/directors-dev 가 위에서 만든 도커 repository 입니다.
+
     - name: Docker build & push to docker repo
       run: |
           cd ${{ github.workspace }}/githubActionTest
