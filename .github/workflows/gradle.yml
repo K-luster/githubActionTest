@@ -65,7 +65,7 @@ jobs:
         ssh -i $HOME/key.pem -o StrictHostKeyChecking=no ubuntu@$SSH_KNOWN_HOSTS
         sudo docker rm -f $(docker ps -qa)
         sudo docker pull jakeheon/githubaction
-        sudo docker run jakeheon/githubaction
+        sudo docker run -p 80:8080 jakeheon/githubaction
       env:
         SSH_PEM_KEY: ${{secrets.KEY}}
         SSH_KNOWN_HOSTS: ${{secrets.HOST}}
