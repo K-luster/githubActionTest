@@ -57,12 +57,18 @@ jobs:
           docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
           docker build -t jakeheon/githubaction -f Dockerfile .
           docker push jakeheon/githubaction
+
     - name: Build and deploy
       run: |
-        sudo apt-get install sshpass
-        ssh -i $SSH_PRIVATE_KEY ubuntu@$SSH_KNOWN_HOSTS
+        echo: "$SSH_PEM_KEY" >> $HOME/key.pem
+        chmod 400 $HOME/key.pem
+        ssh -i $HOME/key.pem -o StrictHostKeyCheckin=no ubuntu@$SSH_KNOWN_HOSTS
+        sudo docker rm -f $(docker ps -qa)
+        sudo docker pull jakeheon/githubaction
+        docker-compose up -d
+        docker image prune -f
       env:
-        SSH_PRIVATE_KEY: ${{secrets.KEY}}
+        SSH_PEM_KEY: ${{secrets.KEY}}
         SSH_USER: ${{secrets.SSH_USER}}
         SSH_KNOWN_HOSTS: ${{secrets.HOST}}
 
