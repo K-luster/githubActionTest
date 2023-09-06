@@ -35,8 +35,8 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         
-#    - name: init with Gradle
-#      uses: gradle/gradle-build-action@v2
+    - name: init with Gradle
+      uses: gradle/gradle-build-action@v2
       
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
