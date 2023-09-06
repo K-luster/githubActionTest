@@ -56,21 +56,31 @@ jobs:
           docker push jakeheon/githubaction
 
     - name: Build and deploy
-      run: |
-        echo "$SSH_PEM_KEY" >> $HOME/key.pem
-        chmod 400 $HOME/key.pem
-        ssh -i $HOME/key.pem -o StrictHostKeyChecking=no ubuntu@$SSH_KNOWN_HOSTS
-        pwd
-        ls
-        sudo docker ps -a
-        sudo docker rm -f $(docker ps -qa)
-        sudo docker-compose up -d
-        sudo docker image prune -f
+      uses: appleboy/ssh-action@master
+      id: deploy
+      with:
+        host: ${{ secrets.HOST }}
+        username: ubuntu
+        key: ${{ secrets.KEY }}
+        envs: GITHUB_SHA
+        script: |
+          sudo docker rm -f $(docker ps -qa)
+          sudo docker pull jakeheon/githubaction
+          docker-compose up -d
+          docker image prune -f
+      # run: |
+      #   echo "$SSH_PEM_KEY" >> $HOME/key.pem
+      #   chmod 400 $HOME/key.pem
+      #   ssh -i $HOME/key.pem -o StrictHostKeyChecking=no ubuntu@$SSH_KNOWN_HOSTS
+      #   pwd
+      #   ls
+      #   sudo docker ps -a
+      #   sudo docker rm -f $(docker ps -qa)
+      #   sudo docker-compose up -d
+      #   sudo docker image prune -f
 #        sudo docker pull jakeheon/githubaction
 #        sudo docker run -p 80:8080 jakeheon/githubaction
-      env:
-        SSH_PEM_KEY: ${{secrets.KEY}}
-        SSH_KNOWN_HOSTS: ${{secrets.HOST}}
+
 
 
         
