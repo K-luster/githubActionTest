@@ -66,8 +66,7 @@ jobs:
         script: |
           sudo docker rm -f $(docker ps -qa)
           sudo docker pull jakeheon/githubaction
-          sudo docker-compose up -d
-          sudo docker image prune -f
+          sudo docker run -it -d -p 80:8080 jakeheon/githubaction
       # run: |
       #   echo "$SSH_PEM_KEY" >> $HOME/key.pem
       #   chmod 400 $HOME/key.pem
