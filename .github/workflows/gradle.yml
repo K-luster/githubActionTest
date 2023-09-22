@@ -7,11 +7,10 @@
 
 name: Java CI with Gradle
 
-on: 
-  push: 
-    branches: [ "main","develop" ]
-  pull_request:
-    branches: [ "develop" ]
+on:
+  push:
+    branches:
+      - develop
 
 permissions:
   contents: read
