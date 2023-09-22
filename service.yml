@@ -3,10 +3,11 @@ kind: Service
 metadata:
   name: devops-spring-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 80
       protocol: TCP
       targetPort: 8080
   selector:
     app: githubActionTest
+
