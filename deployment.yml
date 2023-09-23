@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: core
-          image: jakeheon/githubaction:latest
+          image: jakeheon/githubaction
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
