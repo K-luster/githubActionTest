@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: githubActionTest
+spec:
+  selector:
+    matchLabels:
+      app: githubActionTest
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: githubActionTest
+    spec:
+      containers:
+        - name: core
+          image: Jake-huen/githubActionTest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1000Mi
